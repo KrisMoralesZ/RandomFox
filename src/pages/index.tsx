@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { RandomFox } from "@/components/RandomFox";
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <>
       <Head>
@@ -12,8 +13,10 @@ export default function Home() {
       </Head>
       <main>
         <h1 className="text-3xl font-bold underline">Hello World 😎!</h1>
+        <RandomFox></RandomFox>
       </main>
       <footer></footer>
     </>
   );
-}
+};
+export default Home;

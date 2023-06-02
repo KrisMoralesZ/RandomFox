@@ -1,9 +1,17 @@
+import { type } from "os";
 import { useRef, useEffect, useState } from "react";
+import type { ImgHTMLAttributes } from "react";
 
-export type Props = { image: string };
+type LazyImageProps = {
+  src: string;
+};
 
-export const RandomFox = ({ image }: Props): JSX.Element => {
-  const [src, setSrc] = useState("");
+type ImageNative = ImgHTMLAttributes<HTMLImageElement>;
+
+type Props = LazyImageProps & ImageNative;
+
+export const LazyImage = ({ src, ...imgProps }: Props): JSX.Element => {
+  const [currentSrc, setCurrentSrc] = useState("");
   const ref = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
@@ -12,7 +20,7 @@ export const RandomFox = ({ image }: Props): JSX.Element => {
       entries.forEach((entry) => {
         // onIntersection
         if (entry.isIntersecting) {
-          setSrc(image);
+          setCurrentSrc(currentSrc);
         }
       });
     });
@@ -26,8 +34,6 @@ export const RandomFox = ({ image }: Props): JSX.Element => {
     return () => {
       observer.disconnect();
     };
-  }, [image]);
-  return (
-    <img ref={ref} src={src} width={320} height="auto" className="rounded" />
-  );
+  }, [src]);
+  return <img ref={ref} src={src} {...imgProps} />;
 };

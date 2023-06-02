@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { RandomFox } from "@/components/RandomFox";
+import { LazyImage } from "@/components/LazyImage";
 import { useState } from "react";
 import type { MouseEventHandler } from "react";
 
@@ -37,7 +37,14 @@ const Home: NextPage = () => {
         <button onClick={addNewFox}>Add New Fox</button>
         {images.map(({ id, url }) => (
           <div key={id} className="p-4">
-            <RandomFox image={url} />
+            <LazyImage
+              src={url}
+              width={320}
+              height="auto"
+              title="Random Fox"
+              className="rounded bg-gray-300"
+              onClick={() => {}}
+            />
           </div>
         ))}
       </main>
